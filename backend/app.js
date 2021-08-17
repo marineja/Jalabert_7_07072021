@@ -36,25 +36,7 @@ var pool  = mysql.createPool({
     database: 'groupomania'
 });
 
-exports.getUsers = function(callback) {
-  pool.getConnection(function(err, connection) {
-    if(err) { 
-      console.log(err); 
-      callback(true); 
-      return; 
-    }
-    var sql = "SELECT id,username FROM users";
-    connection.query(sql, [], function(err, results) {
-      connection.release();
-      if(err) { 
-        console.log(err); 
-        callback(true); 
-        return; 
-      }
-      callback(false, results);
-    });
-  });
-};
+
 
 // CORS configuration de l'adresse
 app.use(cors({
@@ -73,8 +55,8 @@ app.use(bodyParser.json());
 //gestion des routes principales
 /* app.use('/images', express.static(path.join(__dirname, 'images')));
 
-app.use('/api/sauces', saucesRoutes);
-app.use('/api/auth', userRoutes); */
+app.use('/api/posts', postsRoutes);
+app.use('/api/auth', usersRoutes); */
 
 // exportation de l'application
 module.exports = app;
