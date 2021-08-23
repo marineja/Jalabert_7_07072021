@@ -7,6 +7,7 @@ const bodyParser = require('body-parser');
 const cors = require('cors');
 
 
+const postsRoutes = require('./routes/posts');
 
 
 
@@ -51,6 +52,8 @@ app.use((req, res, next) => {
 });
 
 app.use(bodyParser.json());
+
+app.use('/api/posts', postsRoutes);
 
 //gestion des routes principales
 /* app.use('/images', express.static(path.join(__dirname, 'images')));

@@ -3,7 +3,7 @@
     <router-link to="/">Connection</router-link> |
     <router-link to="/Inscription">Inscription</router-link> 
   </nav>
-  <router-view />
+ 
 </template>
 
 <script>

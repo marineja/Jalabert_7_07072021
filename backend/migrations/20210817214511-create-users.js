@@ -10,7 +10,7 @@ module.exports = {
       },
       
       email: {
-        allowNull:false
+        allowNull:false,
         type:Datatypes.STRING,
          //pour vérifier que le mail soit unique
          validate: {
@@ -22,7 +22,7 @@ module.exports = {
         }
       },
       username: {
-        allowNull:false
+        allowNull:false,
         type: Sequelize.STRING
       },
       password: {
