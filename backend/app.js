@@ -58,7 +58,6 @@ app.use('/api/posts', postsRoutes);
 //gestion des routes principales
 /* app.use('/images', express.static(path.join(__dirname, 'images')));
 
-app.use('/api/posts', postsRoutes);
 app.use('/api/auth', usersRoutes); */
 
 // exportation de l'application
