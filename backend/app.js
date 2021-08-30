@@ -8,6 +8,7 @@ const cors = require('cors');
 
 
 const postsRoutes = require('./routes/posts');
+const usersRoutes = require('./routes/users');
 
 
 
@@ -54,6 +55,7 @@ app.use((req, res, next) => {
 app.use(bodyParser.json());
 
 app.use('/api/posts', postsRoutes);
+app.use('/api/auth', usersRoutes);
 
 //gestion des routes principales
 /* app.use('/images', express.static(path.join(__dirname, 'images')));
