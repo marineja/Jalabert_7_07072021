@@ -12,8 +12,8 @@ const usersRoutes = require('./routes/users');
 
 
 
-/* //pour avoir acces au chemin du systeme de ficher (pour les images)
-const path = require('path'); */
+ //pour avoir acces au chemin du systeme de ficher (pour les images)
+const path = require('path'); 
 
 /* //parametre des routes things
 const saucesRoutes = require('./routes/sauces');
@@ -58,9 +58,8 @@ app.use('/api/posts', postsRoutes);
 app.use('/api/auth', usersRoutes);
 
 //gestion des routes principales
-/* app.use('/images', express.static(path.join(__dirname, 'images')));
+ app.use('/images', express.static(path.join(__dirname, 'images')));
 
-app.use('/api/auth', usersRoutes); */
 
 // exportation de l'application
 module.exports = app;

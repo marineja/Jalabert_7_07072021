@@ -1,6 +1,7 @@
 const Posts = require('../models/posts');
+const fs = require('fs');
 
-exports.createPosts = (req, res, next) => {
+/*exports.createPosts = (req, res, next) => {
     // recuperer le user avec findone
     const posts = new Posts({
       title: req.body.title,
@@ -23,9 +24,21 @@ exports.createPosts = (req, res, next) => {
         });
       }
     );
+}; */
+
+exports.createPosts = (req, res, next) => {
+  const postsObject = JSON.parse(req.body.thing);
+  delete postsObject._id;
+  const posts = new Posts({
+    ...postsObject,
+    imageUrl: `${req.protocol}://${req.get('host')}/images/${req.file.filename}`
+  });
+  posts.save()
+    .then(() => res.status(201).json({ message: 'Objet enregistré !'}))
+    .catch(error => res.status(400).json({ error }));
 };
 
-exports.modifyPosts = (req, res, next) => {
+/*exports.modifyPosts = (req, res, next) => {
   //faire requete findone pour recuperer l'ancien post
     const posts = new Posts({
         title: req.body.title,
@@ -48,22 +61,30 @@ exports.modifyPosts = (req, res, next) => {
         });
       }
     );
+  }; */
+
+  exports.modifyPosts = (req, res, next) => {
+    const postsObject = req.file ?
+      {
+        ...JSON.parse(req.body.posts),
+        imageUrl: `${req.protocol}://${req.get('host')}/images/${req.file.filename}`
+      } : { ...req.body };
+    Posts.updateOne({ _id: req.params.id }, { ...postsObject, _id: req.params.id })
+      .then(() => res.status(200).json({ message: 'Objet modifié !'}))
+      .catch(error => res.status(400).json({ error }));
   };
 
-exports.deletePosts = (req, res, next) => {
-    Posts.deleteOne({_id: req.params.id}).then(
-      () => {
-        res.status(200).json({
-          message: 'Deleted!'
+  exports.deletePosts = (req, res, next) => {
+    Posts.findOne({ _id: req.params.id })
+      .then(posts => {
+        const filename = posts.imageUrl.split('/images/')[1];
+        fs.unlink(`images/${filename}`, () => {
+          Posts.deleteOne({ _id: req.params.id })
+            .then(() => res.status(200).json({ message: 'Objet supprimé !'}))
+            .catch(error => res.status(400).json({ error }));
         });
-      }
-    ).catch(
-      (error) => {
-        res.status(400).json({
-          error: error
-        });
-      }
-    );
+      })
+      .catch(error => res.status(500).json({ error }));
   };
 
 exports.getOnPosts = (req, res, next) => {
