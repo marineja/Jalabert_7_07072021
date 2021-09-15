@@ -15,13 +15,7 @@ const usersRoutes = require('./routes/users');
  //pour avoir acces au chemin du systeme de ficher (pour les images)
 const path = require('path'); 
 
-/* //parametre des routes things
-const saucesRoutes = require('./routes/sauces');
 
-const userRoutes = require('./routes/user');
-
-//paramètre pour renforcer l'authentification de l'utilisateur
-const auth = require('./routes/user'); */
 
 
 
@@ -41,9 +35,9 @@ var pool  = mysql.createPool({
 
 
 // CORS configuration de l'adresse
-app.use(cors({
+/*app.use(cors({
   origin: 'http://localhost:4200'
-}));
+})); */
 //configuration des entêtes
 app.use((req, res, next) => {
   res.setHeader('Access-Control-Allow-Origin', '*');

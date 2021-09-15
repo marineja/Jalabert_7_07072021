@@ -11,24 +11,52 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
-      models.Comment.belongsTo(models.User,{
+      models.commentaires.belongsTo(models.users,{
         foreignKey: {
           allowNull: false
         }, onDelete: 'CASCADE',
       }),
-      models.Comment.belongsTo(models.Post, {
+
+      models.commentaires.belongsTo(models.posts, {
         foreignKey: {
           allowNull: false
         }, onDelete: 'CASCADE',
       })
     }
+
+    toJSON() {
+      return { ...this.get(), id: undefined, userid: undefined, postid: undefined }
+    }
+
   };
   commentaires.init({
-    id: DataTypes.INTEGER,
-    userid: DataTypes.INTEGER,
-    message: DataTypes.STRING,
+    id: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      autoIncrement: true,
+      primaryKey: true
+    },
+    userid: {
+      type: DataTypes.INTEGER,
+      references: {
+         model: 'Users', 
+         key: 'id', 
+      },
+      allowNull: false,
+   },
+    message: {
+      type: DataTypes.STRING,
+      allowNull: false
+    },
     date: DataTypes.DATE,
-    postid: DataTypes.INTEGER
+    postid: {
+      type: DataTypes.INTEGER,
+      references: {
+         model: 'Posts',
+         key: 'id', 
+      },
+      allowNull: false,
+   }
   }, {
     sequelize,
     modelName: 'commentaires',
