@@ -19,9 +19,9 @@ module.exports = (sequelize, DataTypes) => {
       models.posts.hasMany(models.commentaires)
     }
 
-    toJSON() {
+    /*toJSON() {
       return { ...this.get(), id: undefined,  userid: undefined }
-    }
+    } */
 
   };
   posts.init({
@@ -31,7 +31,7 @@ module.exports = (sequelize, DataTypes) => {
       autoIncrement: true,
       primaryKey: true
     },
-    userid: {
+    userId: {
       type: DataTypes.INTEGER,
       references: {
          model: 'Users', 

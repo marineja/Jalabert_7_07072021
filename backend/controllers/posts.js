@@ -1,20 +1,24 @@
-const Posts = require('../models/posts');
+//const Posts = require('../models/posts');
 const fs = require('fs');
+const db = require('../models');
 
-/*exports.createPosts = (req, res, next) => {
+exports.createPosts = async (req, res, next) => {
+  const user = await db.users.findOne({ where: { id : req.query.userid }}); // ecrit coté posman
+  console.log('useriD', user.id)
     // recuperer le user avec findone
-    const posts = new Posts({
-      title: req.body.title,
-      message: req.body.message,
-      //photo: req.body.photo,
-      date: req.body.date,
-      userid: req.body.userid // par l'objet user recupéré plus haut
-     
-    });
-    thing.save().then(
+    const posts = await db.posts.create({
+      title: req.query.title,
+      message: req.query.message,
+      //photo: req.query.photo,
+      date: req.query.date,
+       // par l'objet user recupéré plus haut
+      userId: user.id 
+    })
+
+   .then(
       () => {
         res.status(201).json({
-          message: 'Post saved successfully!'
+          message: 'Post sauvé!'
         });
       }
     ).catch(
@@ -24,9 +28,9 @@ const fs = require('fs');
         });
       }
     );
-}; */
+}; 
 
-exports.createPosts = (req, res, next) => {
+/*exports.createPosts = (req, res, next) => {
   const postsObject = JSON.parse(req.body.thing);
   delete postsObject._id;
   const posts = new Posts({
@@ -36,7 +40,7 @@ exports.createPosts = (req, res, next) => {
   posts.save()
     .then(() => res.status(201).json({ message: 'Objet enregistré !'}))
     .catch(error => res.status(400).json({ error }));
-};
+}; */
 
 /*exports.modifyPosts = (req, res, next) => {
   //faire requete findone pour recuperer l'ancien post
@@ -66,7 +70,7 @@ exports.createPosts = (req, res, next) => {
   exports.modifyPosts = (req, res, next) => {
     const postsObject = req.file ?
       {
-        ...JSON.parse(req.body.posts),
+        ...JSON.parse(req.query.posts),
         imageUrl: `${req.protocol}://${req.get('host')}/images/${req.file.filename}`
       } : { ...req.body };
     Posts.updateOne({ _id: req.params.id }, { ...postsObject, _id: req.params.id })
