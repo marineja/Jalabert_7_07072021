@@ -58,4 +58,20 @@ exports.signup = async (req, res, next) => {
       .catch(error => res.status(500).json({ error }));
   };
 
-  //supression user (delete)
+  //supression user (delete)------------------------------------------------------------------
+
+  exports.deleteUser = (req, res, next) => {
+    console.log(req.params.id)
+    db.users.findOne({
+      where: { id: req.params.id }
+  })
+      .then(users => {
+        
+          console.log(users);
+          db.users.destroy({
+            where: { id: req.params.id }
+        })
+            .then(() => res.status(200).json({ message: 'user supprimé !'}))
+            .catch(error => res.status(400).json({ error }));
+        }); 
+ };

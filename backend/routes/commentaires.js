@@ -5,9 +5,10 @@ const auth = require('../middleware/auth');
 const multer = require('../middleware/multer-config');
 
 router.post('/', multer, commentairesCtrl.createcommentaire); // penser a le rajouter auth
-/*router.get('/:id', auth, commentairesCtrl.getOncommentaire);
-router.put('/:id', auth, multer, commentairesCtrl.modifycommentaire);
-router.delete('/:id', auth, commentairesCtrl.deletecommentaire);
-router.get('/', auth, commentairesCtrl.getAllcommentaire); */
+router.delete('/:id', commentairesCtrl.deletecommentaire);
+
+
+
+//router.get('/', commentairesCtrl.getAllcommentaire); 
 
 module.exports = router;

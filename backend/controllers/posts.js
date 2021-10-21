@@ -122,10 +122,10 @@ exports.createPosts = async (req, res, next) => {
      // })
       //.catch(error => res.status(500).json({ error }));
   };
-
+// --------------------------------------------------- fait en plus--------------------------------------
 exports.getOnPosts = (req, res, next) => {
-    Posts.findOne({
-      _id: req.params.id
+    db.posts.findOne({
+      where: { id: req.params.id }
     }).then(
       (posts) => {
         res.status(200).json(posts);
@@ -140,7 +140,7 @@ exports.getOnPosts = (req, res, next) => {
   };
 
   exports.getAllPosts = (req, res, next) => {
-    Posts.find().then(
+    db.posts.find().then(
       (posts) => {
         res.status(200).json(posts);
       }

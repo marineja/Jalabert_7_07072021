@@ -12,9 +12,8 @@ module.exports = (sequelize, DataTypes) => {
     static associate(models) {
       // define association here
       models.posts.belongsTo(models.users, {
-        foreignKey: {
-          allowNull: false
-        }, onDelete: 'CASCADE'
+        foreignKey: 'userid', 
+        onDelete: 'CASCADE'
       }),
       models.posts.hasMany(models.commentaires)
     }
@@ -25,12 +24,7 @@ module.exports = (sequelize, DataTypes) => {
 
   };
   posts.init({
-    id: {
-      type: DataTypes.INTEGER,
-      allowNull: false,
-      autoIncrement: true,
-      primaryKey: true
-    },
+    
     userId: {
       type: DataTypes.INTEGER,
       references: {

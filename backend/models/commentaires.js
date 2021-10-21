@@ -24,9 +24,9 @@ module.exports = (sequelize, DataTypes) => {
       })
     }
 
-    toJSON() {
+   /* toJSON() {
       return { ...this.get(), id: undefined, userid: undefined, postid: undefined }
-    }
+    }*/
 
   };
   commentaires.init({
@@ -36,7 +36,7 @@ module.exports = (sequelize, DataTypes) => {
       autoIncrement: true,
       primaryKey: true
     },
-    userid: {
+    userId: {
       type: DataTypes.INTEGER,
       references: {
          model: 'Users', 
@@ -49,7 +49,7 @@ module.exports = (sequelize, DataTypes) => {
       allowNull: false
     },
     date: DataTypes.DATE,
-    postid: {
+    postId: {
       type: DataTypes.INTEGER,
       references: {
          model: 'Posts',
