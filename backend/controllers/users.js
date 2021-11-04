@@ -4,7 +4,7 @@ const db = require('../models');
 
 exports.signup = async (req, res, next) => {
  
-    const user =  await db.users.create({
+    const user =  await db.User.create({
         email: req.query.email,
         password: await bcrypt.hash(req.query.password, 10),
         username: req.query.username,
@@ -34,41 +34,43 @@ exports.signup = async (req, res, next) => {
   
 
   exports.login = (req, res, next) => {
-    db.users.findOne({where:{ email: req.query.email }})
-      .then(user => {
-        if (!user) {
+    db.User.findOne({where:{ email: req.query.email }})
+      .then(User => {
+        if (!User) {
           return res.status(401).json({ error: 'Utilisateur non trouvé !' });
         }
-        bcrypt.compare(req.query.password, user.password)
+        console.log(User.password);
+        console.log(req.query.password);
+        bcrypt.compare(req.query.password, User.password)
           .then(valid => {
             if (!valid) {
               return res.status(401).json({ error: 'Mot de passe incorrect !' });
             }
             res.status(200).json({
-              userid: user._id,
+              userid: User._id,
               token: jwt.sign(
-                { userid: user._id },
+                { userid: User._id },
                 'RANDOM_TOKEN_SECRET',
                 { expiresIn: '24h' }
               )
             });
           })
-          .catch(error => res.status(500).json({ error }));
+          .catch(error => res.status(500).json("pemiere ereur"));
       })
-      .catch(error => res.status(500).json({ error }));
+      .catch(error => res.status(500).json( "deuxieme catch" ));
   };
 
   //supression user (delete)------------------------------------------------------------------
 
   exports.deleteUser = (req, res, next) => {
     console.log(req.params.id)
-    db.users.findOne({
+    db.User.findOne({
       where: { id: req.params.id }
   })
-      .then(users => {
+      .then(User => {
         
-          console.log(users);
-          db.users.destroy({
+          console.log(User);
+          db.User.destroy({
             where: { id: req.params.id }
         })
             .then(() => res.status(200).json({ message: 'user supprimé !'}))

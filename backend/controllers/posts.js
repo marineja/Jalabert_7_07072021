@@ -3,16 +3,16 @@ const fs = require('fs');
 const db = require('../models');
 
 exports.createPosts = async (req, res, next) => {
-  const user = await db.users.findOne({ where: { id : req.query.userid }}); // ecrit coté posman
-  console.log('useriD', user.id)
+  const User = await db.User.findOne({ where: { id : req.query.userid }}); // ecrit coté posman
+  console.log('useriD', User.id)
     // recuperer le user avec findone
-    const posts = await db.posts.create({
+    const Post = await db.Post.create({
       title: req.query.title,
       message: req.query.message,
       //photo: req.query.photo,
-      date: req.query.date,
+     // date: req.query.date,
        // par l'objet user recupéré plus haut
-      userId: user.id 
+      userId: User.id 
     })
 
    .then(
@@ -106,14 +106,14 @@ exports.createPosts = async (req, res, next) => {
 
   exports.deletePosts = (req, res, next) => {
     console.log(req.params.id)
-    db.posts.findOne({
+    db.Post.findOne({
       where: { id: req.params.id }
   })
-      .then(posts => {
+      .then(Post => {
         //const filename = posts.imageUrl.split('/images/')[1];
         //fs.unlink(`images/${filename}`, () => {
-          console.log(posts);
-          db.posts.destroy({
+          console.log(Post);
+          db.Post.destroy({
             where: { id: req.params.id }
         })
             .then(() => res.status(200).json({ message: 'commentaire supprimé !'}))
@@ -124,11 +124,11 @@ exports.createPosts = async (req, res, next) => {
   };
 // --------------------------------------------------- fait en plus--------------------------------------
 exports.getOnPosts = (req, res, next) => {
-    db.posts.findOne({
+    db.Post.findOne({
       where: { id: req.params.id }
     }).then(
-      (posts) => {
-        res.status(200).json(posts);
+      (Post) => {
+        res.status(200).json(Post);
       }
     ).catch(
       (error) => {
@@ -140,9 +140,9 @@ exports.getOnPosts = (req, res, next) => {
   };
 
   exports.getAllPosts = (req, res, next) => {
-    db.posts.find().then(
-      (posts) => {
-        res.status(200).json(posts);
+    db.Post.findAll().then(
+      (Post) => {
+        res.status(200).json(Post);
       }
     ).catch(
       (error) => {

@@ -15,22 +15,22 @@ module.exports = {
         references: {
           model: 'users',
           key: 'id'
-        },
+        }
       },
       message: {
-        type: Sequelize.STRING
-      },
-      date: {
         allowNull: false,
-        type: Sequelize.DATE
-      },
+        type: Sequelize.STRING
+        },
+      
       postid: {
         allowNull: false,
         type: Sequelize.INTEGER,
+        onDelete: 'CASCADE',
         references: {
-          model: 'posts',
-          key: 'id'
-        },
+          model: 'Posts',
+          key: 'id',
+          as:'postId'
+        }
       },
       createdAt: {
         allowNull: false,

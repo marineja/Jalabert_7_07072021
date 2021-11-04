@@ -3,7 +3,7 @@ const {
   Model
 } = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
-  class commentaires extends Model {
+  class Commentaire extends Model { 
     /**
      * Helper method for defining associations.
      * This method is not a part of Sequelize lifecycle.
@@ -11,55 +11,25 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
-      models.commentaires.belongsTo(models.users,{
-        foreignKey: {
-          allowNull: false
-        }, onDelete: 'CASCADE',
-      }),
+      Commentaire.belongsTo(models.User,{ 
+        foreignKey: 'userId',
+        onDelete: 'CASCADE'
+      })
 
-      models.commentaires.belongsTo(models.posts, {
-        foreignKey: {
-          allowNull: false
-        }, onDelete: 'CASCADE',
+      Commentaire.belongsTo(models.Post, {
+        foreignKey: 'postId',
+        onDelete: 'CASCADE'
       })
     }
-
-   /* toJSON() {
-      return { ...this.get(), id: undefined, userid: undefined, postid: undefined }
-    }*/
-
   };
-  commentaires.init({
-    id: {
-      type: DataTypes.INTEGER,
-      allowNull: false,
-      autoIncrement: true,
-      primaryKey: true
-    },
-    userId: {
-      type: DataTypes.INTEGER,
-      references: {
-         model: 'Users', 
-         key: 'id', 
-      },
-      allowNull: false,
-   },
-    message: {
-      type: DataTypes.STRING,
-      allowNull: false
-    },
-    date: DataTypes.DATE,
-    postId: {
-      type: DataTypes.INTEGER,
-      references: {
-         model: 'Posts',
-         key: 'id', 
-      },
-      allowNull: false,
-   }
+
+  Commentaire.init({
+    userId: DataTypes.INTEGER,
+    postId: DataTypes.INTEGER,
+    message: DataTypes.STRING
   }, {
     sequelize,
-    modelName: 'commentaires',
+    modelName: 'Commentaire',
   });
-  return commentaires;
+  return Commentaire;
 };
