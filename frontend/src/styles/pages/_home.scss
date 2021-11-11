@@ -1,0 +1,35 @@
+.home-container {
+  min-height: 80vh;
+}
+.home-btn {
+  min-width: 230px;
+  margin-right: 20px;
+  padding: 30px;
+}
+.home-right img {
+  max-width: 100%;
+  max-height: 100%;
+}
+.btn-icon {
+  margin-left: 10px;
+  font-size: 1.5rem;
+}
+.main-logo {
+  max-height: 70px;
+}
+.main-brand {
+  max-height: 90px;
+}
+
+@media (max-width: 640px) {
+	.main-brand {max-height: 3em;}
+  .main-logo {max-height: 3em;}
+
+}
+
+.home-btn:hover,
+.home-btn:focus {
+  a {
+    color: whitesmoke !important;
+  }
+}

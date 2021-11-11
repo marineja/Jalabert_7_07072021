@@ -36,9 +36,9 @@ var pool  = mysql.createPool({
 
 
 // CORS configuration de l'adresse
-/*app.use(cors({
-  origin: 'http://localhost:4200'
-})); */
+app.use(cors({
+  origin: 'http://localhost:3000'
+})); 
 //configuration des entêtes
 app.use((req, res, next) => {
   res.setHeader('Access-Control-Allow-Origin', '*');

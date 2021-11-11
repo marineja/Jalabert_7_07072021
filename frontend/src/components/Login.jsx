@@ -43,7 +43,7 @@ const Login = ({onSubmit, onRegister}) => {
             })
         };
         
-        fetch('http://localhost:8080/api/user/login', requestOptions)
+        fetch('http://localhost:3000/api/user/login', requestOptions)
             .then(response => response.json())
             .then(data => {
                 console.log(data)
@@ -63,15 +63,13 @@ const Login = ({onSubmit, onRegister}) => {
         const requestOptions = {
             method: 'POST',
             body: JSON.stringify({
-                prenom: regPrenomValue,
-                nom: regNomValue,
                 username:regUserValue,
                 password:regPassValue,
                 email: regEmailValue,
-                telephone: regTelephoneValue
+              
             })
         };
-        fetch('http://localhost:8080/api/user/create', requestOptions)
+        fetch('http://localhost:3000/api/signup', requestOptions)
             .then(response => response.json())
             .then(data => {
                 if (data.status === "ok") {

@@ -4,23 +4,23 @@ import {
   Route,
   NavLink,
   Link,
-} from "react-router-dom"; 
+} from "react-router-dom";
 import React from "react";
 import Home from "./pages/Home";
-//import Profil from "./pages/Profil";
-
-import Contact from "./pages/Contact";
+import Profil from "./pages/Profil";
 import Connexion from "./pages/Connexion";
+import Posts from "./pages/Posts"; 
+
+import Login from "./components/Login"; 
 import NotFound from "./pages/NotFound";
-import About from "./pages/About";
+
 import AccountCreated from "./pages/AccountCreated";
 import PrivateRoute from "./components/PrivateRoute";
-
 
 function App() {
   const [loggedUser, setLoggedUser] = React.useState([]);
   const [auth, setAuth] = React.useState(false);
-  const [role, setRole] = React.useState("");
+  
 
   const handleLogin = (user) => {
     setAuth(true);
@@ -38,16 +38,16 @@ function App() {
         <header>
           <nav className="navbar navbar-expand-lg navbar-light bg-light rounded" aria-label="Navigation">
             <div className="container-fluid">
-              {/* Conditionnelle pour changer une classe du logo si Login/Logout */}
+              {/* Conditionnelle pour changer une classe du logo si Login/Logout  penser à rajouter les image des logo*/}
               {auth ? (
                 <a className="navbar-brand" href="/#">
-                  <img src="logo.png" className="main-logo" alt="Logo de HandiHelp"/>
-                  <img src="brand.png" className="main-brand" alt="Brand Logo de HandiHelp"/>
+                  <img src="" className="main-logo" alt="Logo de Groupomania"/>  
+                  <img src="" className="main-brand" alt="Brand Logo de Groupomania"/>
                 </a>
               ) : (
                 <a className="navbar-brand navbar-brand-logout" href="/#">
-                  <img src="logo.png" className="main-logo" alt="Logo de HandiHelp"/>
-                  <img src="brand.png" className="main-brand" alt="Brand Logo de HandiHelp"/>
+                  <img src="" className="main-logo" alt="Logo de Groupomania"/>
+                  <img src="" className="main-brand" alt="Brand Logo de Groupomania"/>
                 </a>
               )}
               <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navBarNavigation" aria-controls="navBarNavigation" aria-expanded="false" aria-label="Toggle navigation">
@@ -59,9 +59,7 @@ function App() {
                   <li className="nav-item">
                     <NavLink exact to="/" className="nav-link"activeClassName="active">Accueil</NavLink>
                   </li>
-                  <li className="nav-item">
-                    <NavLink exact to="/about" className="nav-link"activeClassName="active">A propos</NavLink>
-                  </li>
+                  
                   {/* Conditionnelle pour les liens de navigation à masquer lorsque Logout */}
                   {auth ? (
                     <li className="nav-item">
@@ -70,12 +68,10 @@ function App() {
                   ) : null}
                   {auth ? (
                     <li className="nav-item">
-                      <NavLink exact to="/missions" className="nav-link" activeClassName="active">Missions</NavLink>
+                      <NavLink exact to="/missions" className="nav-link" activeClassName="active">Posts</NavLink>
                     </li>
                   ) : null}
-                  <li className="nav-item">
-                    <NavLink exact to="/contact" className="nav-link" activeClassName="active">Contact</NavLink>
-                  </li>
+                 
                   {/* Conditionnelle pour le lien de navigation "Connexion" OU "Logout" */}
                   {auth ? (
                     <li className="nav-item">
@@ -96,8 +92,7 @@ function App() {
         <main className="container-fluid">
           <Switch>
             <Route path="/" exact component={Home} />
-            <Route path="/contact" component={Contact} />
-            <Route path="/about" component={About} />
+            
             <Route path="/connexion">
               <Connexion onLogin={handleLogin} />
             </Route>
@@ -107,8 +102,8 @@ function App() {
               <Route path="/profil">
                 <Profil user={loggedUser} />
               </Route>
-              <Route path="/missions">
-                <Missions user={loggedUser}/>
+              <Route path="/posts">
+                <Posts user={loggedUser}/>
               </Route>
             </PrivateRoute>
 
@@ -135,7 +130,7 @@ function App() {
             </div>
           </div>
           <div className="text-center p-3 copyright-footer">
-            © 2020 Copyright:<div className="text-dark">HandiHelp</div>
+            © 2020 Copyright:<div className="text-dark">Groupomania</div>
           </div>
         </footer>
       </Router>
