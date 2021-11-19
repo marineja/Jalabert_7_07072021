@@ -5,7 +5,7 @@ const Home = () => {
         <div className="home-container row align-items-center">
             <div className="col-md-6 text-center home-left">
                 <h1 className="display-1">Bienvenue <strong>sur</strong></h1>
-                <h2  className="display-3">Groiupomania</h2>
+                <h2  className="display-3">Groupomania</h2>
                 <blockquote className="blockquote">
                     <p>Le meilleur réseau social d'entreprise</p>
                 </blockquote>

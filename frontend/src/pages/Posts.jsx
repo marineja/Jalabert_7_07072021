@@ -1,11 +1,15 @@
 import React from "react";
 
-const createPosts = ({oncreatePosts, user}) => {
+const CreatePostForm = ({onCreatePosts, user}) => {
     const[title, setTitle] = React.useState("");
     const[date, setDate] = React.useState("");
-    const[message, setDescription] = React.useState("");
+    const[message, setMessage] = React.useState("");
 
-
+     // HANDLERS
+     const onTitreChange = (e) => setTitle(e.target.value);
+     const onDateChange = (e) => setDate(e.target.value);
+     const onMessageChange = (e) => setMessage(e.target.value);
+ 
     const handleSubmit = (e) => {
         e.preventDefault();
         e.stopPropagation();
@@ -22,7 +26,7 @@ const createPosts = ({oncreatePosts, user}) => {
             .then(response => response.json())
             .then(data => {
                 if (data.status === "ok") {
-                    onCreatePost();
+                    onCreatePosts();
                 } else {
                     console.log(data);
                 }
@@ -37,7 +41,7 @@ const createPosts = ({oncreatePosts, user}) => {
                 <div class="row">
                     <div class="col-md-6 mb-3">
                         <h6 htmlFor="title">Titre</h6>
-                        <input type="text" class="form-control" id="titLe" value={title} onChange={onTitleChange} required/>
+                        <input type="text" class="form-control" id="titLe" value={title} onChange={onTitreChange} required/>
                     </div>
                     <div class="col-md-6 mb-3">
                         <h6 htmlFor="date">Date</h6>
@@ -66,7 +70,7 @@ const createPosts = ({oncreatePosts, user}) => {
 const Posts = ({user}) => {
     // constante représentant le state (état) du composant post
     const [posts, setPosts] = React.useState([]);
-    const[newpost, setNewPost] = React.useState(0);
+    const[newPost, setNewPost] = React.useState(0);
 
     
     React.useEffect(() => {
@@ -84,10 +88,11 @@ const Posts = ({user}) => {
 
     return (
         <div className="col-md-6 ms-auto me-auto">
-            <CreatePostForm onCreatePost={handleCreatePost} user={user}/>
-            <h1 className="mt-5 mb-5">Post</h1>
+            <CreatePostForm onCreatePosts={handleCreatePost} user={user}/>
+            <h1 className="mt-5 mb-5">Post</h1> 
+            {posts.map(posts => <Posts data={posts}  key={posts.id}/>)}
         </div>
     )
 }
 
-export default Posts ;
+export default Posts; 

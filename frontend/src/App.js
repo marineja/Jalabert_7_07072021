@@ -10,10 +10,6 @@ import Home from "./pages/Home";
 import Profil from "./pages/Profil";
 import Connexion from "./pages/Connexion";
 import Posts from "./pages/Posts"; 
-
-import Login from "./components/Login"; 
-import NotFound from "./pages/NotFound";
-
 import AccountCreated from "./pages/AccountCreated";
 import PrivateRoute from "./components/PrivateRoute";
 
@@ -107,7 +103,7 @@ function App() {
               </Route>
             </PrivateRoute>
 
-            <Route component={NotFound} />
+            
           </Switch>
         </main>
 

@@ -19,7 +19,7 @@ const Login = ({onSubmit, onRegister}) => {
     const[regUserValue, setRegUserValue] = React.useState("");
     const[regPassValue, setRegPassValue] = React.useState("");
     const[regEmailValue, setRegEmailValue] = React.useState("");
-    const[regTelephoneValue, setRegTelephoneValue] = React.useState("");
+    
 
     // FIELD HANDLERS
     const onLogUserChange = (e) => setLogUserValue(e.target.value);
@@ -29,7 +29,7 @@ const Login = ({onSubmit, onRegister}) => {
     const onRegUserChange = (e) => setRegUserValue(e.target.value);
     const onRegPassChange = (e) => setRegPassValue(e.target.value);
     const onRegEmailChange = (e) => setRegEmailValue(e.target.value);
-    const onRegTelephoneChange = (e) => setRegTelephoneValue(e.target.value);
+    
 
     // LOGIN HANDLER
     const handleLogin = (e) => {
@@ -80,6 +80,7 @@ const Login = ({onSubmit, onRegister}) => {
             }).catch(err => {console.log(err)});
     }
     // RENDER FORM
+    //function AfficheLogin() {
     return (
         <div id="login-wrap">
             <div id="login-html">
@@ -137,11 +138,7 @@ const Login = ({onSubmit, onRegister}) => {
                             {/* Champ controlé : regEmailValue */}
                             <input id="email" type="text" className="input" value={regEmailValue} onChange={onRegEmailChange}></input>
                         </div>
-                        <div className="group">
-                            <label htmlFor="telephone" className="label">Téléphone </label>
-                            {/* Champ controlé : regTelephoneValue */}
-                            <input id="telephone" type="text" className="input" value={regTelephoneValue} onChange={onRegTelephoneChange}></input>
-                        </div>
+                    
                         <div className="group">
                             <input type="submit" className="button" value="Sign Up" onClick={handleRegister}></input>
                         </div>
