@@ -1,33 +1,19 @@
-import {
-  BrowserRouter as Router,
-  Switch,
-  Route,
-  NavLink,
-  Link,
-} from "react-router-dom";
 import React from "react";
-import Home from "./pages/Home";
-import Profil from "./pages/Profil";
-import Connexion from "./pages/Connexion";
-import Posts from "./pages/Posts"; 
-import AccountCreated from "./pages/AccountCreated";
-import PrivateRoute from "./components/PrivateRoute";
-
 function App() {
-  const [loggedUser, setLoggedUser] = React.useState([]);
-  const [auth, setAuth] = React.useState(false);
+    const [loggedUser, setLoggedUser] = React.useState([]);
+    const [auth, setAuth] = React.useState(false);
+    
   
-
-  const handleLogin = (user) => {
-    setAuth(true);
-    setLoggedUser(user);
-  };
-  const handleLogout = () => {
-    setAuth(false);
-    setLoggedUser([]);
-  };
-
-  return (
+    const handleLogin = (user) => {
+      setAuth(true);
+      setLoggedUser(user);
+    };
+    const handleLogout = () => {
+      setAuth(false);
+      setLoggedUser([]);
+    };
+const Navbar = () => {
+    return (
     <div className="App container-fluid d-flex flex-column min-vh-100">
       <Router>
         {/* Header : barre de navigation */}
@@ -37,7 +23,7 @@ function App() {
               {/* Conditionnelle pour changer une classe du logo si Login/Logout  penser à rajouter les image des logo*/}
               {auth ? (
                 <a className="navbar-brand" href="/#">
-                  <img src="" className="main-logo" alt="Logo de Groupomania"/>  
+                  <img src="icon-left-font.png" className="main-logo" alt="Logo de Groupomania"/>  
                   <img src="" className="main-brand" alt="Brand Logo de Groupomania"/>
                 </a>
               ) : (
@@ -106,32 +92,10 @@ function App() {
             
           </Switch>
         </main>
-
-        {/* Footer : Bas de page */}
-        <footer className="bg-light text-center text-lg-start">
-          <div className="container p-4">
-            <div className="row">
-              <div className="col-lg-3 col-md-6 mb-4 mb-md-0">
-                <h6 className="text-black">Mentions légales</h6>
-              </div>
-              <div className="col-lg-3 col-md-6 mb-4 mb-md-0">
-                <h6 className="text-black">Politique en matière de cookies</h6>
-              </div>
-              <div className="col-lg-3 col-md-6 mb-4 mb-md-0">
-                <h6 className="text-black">Politique de confidentialité</h6>
-              </div>
-              <div className="col-lg-3 col-md-6 mb-4 mb-md-0">
-                <h6 className="text-black">Conditions d'utilisation</h6>
-              </div>
-            </div>
-          </div>
-          <div className="text-center p-3 copyright-footer">
-            © 2020 Copyright:<div className="text-dark">Groupomania</div>
-          </div>
-        </footer>
-      </Router>
+        </Router>
     </div>
-  );
-}
 
-export default App;
+    )
+    }
+
+    export default Navbar;;

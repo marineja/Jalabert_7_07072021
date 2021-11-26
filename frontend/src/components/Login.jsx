@@ -1,4 +1,5 @@
 import React from "react";
+
 function myFunction1() {
     let minHeight = document.getElementById("login-wrap");
     minHeight.style.minHeight = "550px";

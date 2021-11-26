@@ -1,6 +1,8 @@
 import React from "react";
 import Login from "../components/Login";  
+import Navbar from "../components/Navbar";
 import ReactDOM from 'react-dom'; 
+import Footer from "../components/Footer";
 
 import { Redirect, useLocation } from 'react-router-dom';
 
@@ -29,8 +31,10 @@ const Connexion = ({onLogin}) => {
  const htmltest = <a>coucou</a>;
 
     ReactDOM.render(
+        <Navbar/>,
         <Login/>,
         document.getElementById('root') 
+        <Footer/>
     );
     
 export default Connexion;  
