@@ -1,7 +1,11 @@
 import axios from "axios"
 import React from "react";
+import {Link, NavLink} from "react-router-dom"
 import {useForm} from "react-hook-form"
 import {useState} from "react"
+//import Posts from "./pages/Posts"; 
+
+import logorouge from 'C:/Users/marin/Desktop/projet 7/Jalabert_7_07072021/frontend/src/assets/logo-nom-rouge.png';
 
 
 function myFunction1() {
@@ -87,7 +91,8 @@ const Login = ({onSubmit, onRegister}) => {
     // RENDER FORM
     //function AfficheLogin() {
     return (
-        <><div id="login-wrap">
+        <>  <img src={logorouge} /> 
+            <div id="login-wrap">
             <div id="login-html">
                 {/* CONNEXION / INSCRIPTION */}
                 <input id="tab-1" type="radio" name="tab" className="sign-in" onClick={myFunction1} defaultChecked></input>
@@ -143,9 +148,9 @@ const Login = ({onSubmit, onRegister}) => {
                             {/* Champ controlé : regEmailValue */}
                             <input id="email" type="text" className="input" value={regEmailValue} onChange={onRegEmailChange}></input>
                         </div>
-
+                        
                         <div className="group">
-                            <input type="submit" className="button" value="Sign Up" onClick={handleRegister}></input>
+                            <input type="submit" className="button" value="Sign Up"  onClick={handleRegister}></input>
                         </div>
                         <div className="hr"></div>
                     </div>
